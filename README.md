@@ -16,20 +16,21 @@
 ### Association
 
 - has_many :items
-- belong_to :order
+- has_many :order
 
 ## items テーブル
 
-| Column                   | Type       | Options     |
-| ------------------------ | ---------- | ----------- |
-| name                     | string     | null: false |
-| info                     | string     | null: false |
-| category_id              | integer    | null: false |
-| sales_status_id          | integer    | null: false |
-| shipping_fee_status_id   | integer    | null: false |
-| prefecture_id            | integer    | null: false |
-| schedule_delivery_id     | integer    | null: false |
-| price                    | integer    | null: false |
+| Column                   | Type       | Options                        |
+| ------------------------ | ---------- | ------------------------------ |
+| name                     | string     | null: false                    |
+| info                     | text       | null: false                    |
+| category_id              | integer    | null: false                    |
+| sales_status_id          | integer    | null: false                    |
+| shipping_fee_status_id   | integer    | null: false                    |
+| prefecture_id            | integer    | null: false                    |
+| schedule_delivery_id     | integer    | null: false                    |
+| price                    | integer    | null: false                    |
+| user                     | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -45,15 +46,15 @@
 ### Association
 
 - belongs_to :user
-- has_one :addresses
-- belongs_to :items
+- has_one :address
+- belongs_to :item
 
 ## addresses テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false                    |
-| prefecture       | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
 | house_number     | string     | null: false                    |
 | building_name    | string     |                                |
