@@ -2,65 +2,67 @@
 ## users テーブル
 
 | Column          | Type   | Options     |
-| ----------      | ------ | ----------- |
+| --------------- | ------ | ----------- |
 | nickname        | string | null: false |
 | email           | string | null: false |
 | password        | string | null: false |
-| name(全角)       | string | null: false |
-| name(カナ)       | text   | null: false |
-| user-birth-date | text   | null: false |
-|            | text   | null: false |
+| last-name       | string | null: false |
+| first-name      | string | null: false |
+| last-name-kana  | string | null: false |
+| first-name-kana | string | null: false |
+| user-birth-date | date   | null: false |
 
 
 ### Association
 
 - has_many :items
-- belong_to :cards
+- belong_to :order
 
 ## items テーブル
 
 | Column                   | Type       | Options     |
-| ----------               | ---------- | ----------- |
-| image                    | string     | null: false |
-| item-name                | text       | null: false |
-| item-info                | text       | null: false |
-| item-category            |            |             |
-| item-sales-status        | references |             |
-| item-shipping-fee-status | references |             |
-| item-prefecture          | references |             |
-| item-schedule-delivery   | references |             |
-| item-price               | references |             |
+| ------------------------ | ---------- | ----------- |
+| image                    |            | null: false |
+| item_name                | integer    | null: false |
+| item_info                | integer    | null: false |
+| item_category            | integer    | null: false |
+| item_sales-status        | integer    | null: false |
+| item_shipping_fee_status | integer    | null: false |
+| item_prefecture          | integer    | null: false |
+| item_schedule_delivery   | integer    | null: false |
+| item_price               | integer    | null: false |
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
+- has_one :order
 
-## cards テーブル
+## orders テーブル
 
-| Column         | Type       | Options                        |
+| Column         | Type       |  Options                       |
 | -------------- | ---------- | ------------------------------ |
-| card-number    | references | null: false, foreign_key: true |
-| card-exp-month | references | null: false, foreign_key: true |
-| card-exp-month | references |                                |
-| card-cvc       | references |                                |
+| order_amount   | string     | null: false,                   |
+| order_day      | string     | null: false,                   |
+| user_id        | references | null: false, foreign_key: true |
+| items_id       | references | null: false, foreign_key: true |
 ### Association
 
 - belongs_to :user
 - has_one :addresses
-- has_many :items
+- belongs_to :items
 
 ## addresses テーブル
 
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ----------- |
-| postal_code      | string     | null: false |
-| prefecture       | text       | null: false |
-| city             | text       | null: false |
-| house_number     |            |             |
-| building_name    | references |             |
-| card | references|            |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | string     | null: false                    |
+| prefecture       | integer    | null: false                    |
+| city             | string     | null: false                    |
+| house_number     | string     | null: false                    |
+| building_name    | string     | null: false                    |
+| phone_number     | string     | null: false                    |
+| order            | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :order
