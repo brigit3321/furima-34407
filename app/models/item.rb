@@ -17,6 +17,7 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :schedule_delivery_id
       validates :price
+      validates :image
     end
 
     with_options numericality: { other_than: 1 } do
