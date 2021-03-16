@@ -7,9 +7,12 @@ class OrderAddress
         validates :item_id
         validates :city
         validates :house_number
-        validates :phone_number, format: {with: /\A\d{11}\z/, message: " Input only number"}
+        validates :phone_number, format: {with: /\A\d{10,11}\z/, message: " Input only number "}
         validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     end
+
+    validates :phone_number, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
+    
 
     with_options presence: true, numericality: { other_than: 1, message: 'Select' } do
         validates :prefecture_id
